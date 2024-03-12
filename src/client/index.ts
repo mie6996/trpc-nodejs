@@ -1,17 +1,17 @@
 /**
  * This is the client-side code that uses the inferred types from the server
  */
-import { createTRPCClient, httpBatchLink } from '@trpc/client';
+import { createTRPCClient, httpBatchLink } from "@trpc/client";
 /**
  * We only import the `AppRouter` type from the server - this is not available at runtime
  */
-import type { AppRouter } from '../server/index.js';
+import type { AppRouter } from "../server/index.js";
 
 // Initialize the tRPC client
 const trpc = createTRPCClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: 'http://localhost:3000',
+      url: "http://localhost:3000",
     }),
   ],
 });
@@ -25,12 +25,12 @@ const trpc = createTRPCClient<AppRouter>({
 
 const users = await trpc.user.list.query();
 //    ^?
-console.log('Users:', users);
+console.log("Users:", users);
 
-const createdUser = await trpc.user.create.mutate({ name: 'sachinraja' });
+const createdUser = await trpc.user.create.mutate({ name: "Hello" });
 //    ^?
-console.log('Created user:', createdUser);
+console.log("Created user:", createdUser);
 
-const user = await trpc.user.byId.query('1');
+const user = await trpc.user.byId.query(1);
 //    ^?
-console.log('User 1:', user);
+console.log("User 1:", user);

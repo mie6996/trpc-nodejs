@@ -1,10 +1,10 @@
 /**
  * This a minimal tRPC server
  */
-import { createHTTPServer } from '@trpc/server/adapters/standalone';
-import { z } from 'zod';
-import { db } from './db.js';
-import { publicProcedure, router } from './trpc.js';
+import { createHTTPServer } from "@trpc/server/adapters/standalone";
+import { z } from "zod";
+import { db } from "./db.js";
+import { publicProcedure, router } from "./trpc.js";
 
 const appRouter = router({
   user: {
@@ -14,7 +14,7 @@ const appRouter = router({
       //    ^?
       return users;
     }),
-    byId: publicProcedure.input(z.string()).query(async (opts) => {
+    byId: publicProcedure.input(z.number()).query(async (opts) => {
       const { input } = opts;
       //      ^?
       // Retrieve the user with the given ID
